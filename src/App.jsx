@@ -32,7 +32,8 @@ function App() {
 
     const nuevo = {
       id: Date.now(),
-      name: nuevoUsuario
+      name: nuevoUsuario,
+      completed: false
   };
 
   setUsuarios([...usuarios, nuevo]);
@@ -64,6 +65,15 @@ function App() {
       setUsuarios(usuariosFiltrados);
     };
 
+      const toggleCompletado = (id) => {
+      const actualizados = usuarios.map((user) =>
+      user.id === id
+    ? { ...user, completed: !user.completed}
+  : user
+   );
+    setUsuarios(actualizados);
+    };
+
     const propsUsuarios = {
       usuarios,
       editandoId,
@@ -71,7 +81,8 @@ function App() {
       setNombreEditado,
       setEditandoId,
       guardarEdicion,
-      eliminarUsuario
+      eliminarUsuario,
+      toggleCompletado
     };
 
   return (

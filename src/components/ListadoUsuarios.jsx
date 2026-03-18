@@ -5,7 +5,8 @@ function ListadoUsuarios({
   setNombreEditado,
   setEditandoId,
   guardarEdicion,
-  eliminarUsuario
+  eliminarUsuario,
+  toggleCompletado
 }) {
   return (
     <ul>
@@ -13,6 +14,7 @@ function ListadoUsuarios({
         <li key={user.id}>
           {editandoId === user.id ? (
             <>
+
               <input
                 value={nombreEditado}
                 onChange={(e) => setNombreEditado(e.target.value)}
@@ -28,7 +30,15 @@ function ListadoUsuarios({
             </>
           ) : (
             <>
-              {user.name}
+              <input
+                type="checkbox"
+                checked={user.completed}
+                onChange={() => toggleCompletado(user.id)}
+                />
+
+                <span className={user.completed ? "completed" : ""}>
+                  {user.name}
+                </span> 
 
               <button
                 onClick={() => {

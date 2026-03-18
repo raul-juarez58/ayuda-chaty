@@ -8,6 +8,12 @@ function TodoApp() {
   });
 
   const [nuevaTarea, setNuevaTarea] = useState("");
+  const [filtro, setFiltro] = useState("todas");
+    const tareasFiltradas = tareas.filter((t) => {
+      if (filtro === "pendientes") return !t.completada;
+      if (filtro === "completadas") return t.completada;
+      return true;
+    });
 
   useEffect(() => {
     localStorage.setItem("tareas", JSON.stringify(tareas));
@@ -47,6 +53,12 @@ function TodoApp() {
     </p>
       <h2>Lista de Tareas 📝</h2>
 
+      <div>
+        <button onClick={() => setFiltro("todas")}>Todas</button>
+        <button onClick={() => setFiltro("pendientes")}>Pendientes</button>
+        <button onClick={() => setFiltro("completadas")}>Completadas</button>
+      </div>
+
       <input
         type="text"
         value={nuevaTarea}
@@ -57,7 +69,7 @@ function TodoApp() {
       <button onClick={agregarTarea}>Agregar</button>
 
       <ul>
-        {tareas.map((t) => (
+        {tareasFiltradas.map((t) => (
           <TodoItem
             key={t.id}
             tarea={t}
