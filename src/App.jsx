@@ -1,12 +1,10 @@
 import { useState,useEffect } from "react";
-import axios from "axios";
 import Saludo from "./components/Saludo";
 import ListadoUsuarios from "./components/ListadoUsuarios";
 import TodoApp from "./components/TodoApp";
 
 
 function App() {
-  const [contador, setContador] = useState(0);
   const [usuarios, setUsuarios] = useState(() => {
     const guardados = localStorage.getItem("usuarios");
     return guardados ? JSON.parse(guardados) : [];
@@ -19,13 +17,6 @@ function App() {
   const [nuevoUsuario, setNuevoUsuario] = useState("");
   const [editandoId, setEditandoId] = useState(null);
   const [nombreEditado, setNombreEditado] = useState("");
-
- // useEffect(() => {
-  //  axios
-    //  .get("https://jsonplaceholder.typicode.com/users")
-      //.then((res) => setUsuarios(res.data))
-      //.catch((err) => console.log(err));
-  //}, []);
 
   const agregarUsuario = () =>{
     if (nuevoUsuario.trim() === "") return;
@@ -91,10 +82,6 @@ function App() {
       <Saludo />
       <TodoApp />
 
-      <h2>Contador: {contador}</h2>
-
-      <button onClick={() => setContador(contador + 1)}>Sumar +</button>
-      <button onClick={() => setContador(contador - 1)}>Restar -</button>
 
       <h3>Agregar usuario:</h3>
 
