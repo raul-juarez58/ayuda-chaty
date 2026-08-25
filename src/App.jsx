@@ -2,6 +2,7 @@ import { useState,useEffect } from "react";
 import Saludo from "./components/Saludo";
 import ListadoUsuarios from "./components/ListadoUsuarios";
 import TodoApp from "./components/TodoApp";
+import FormularioUsuario from "./components/FormularioUsuario";
 
 
 function App() {
@@ -85,14 +86,11 @@ function App() {
 
       <h3>Agregar usuario:</h3>
 
-      <input
-        type="text"
-        value={nuevoUsuario}
-        onChange={(e) => setNuevoUsuario(e.target.value)}
-        placeholder="Nombre"
-      />
-
-      <button onClick={agregarUsuario}>Agregar</button>
+      <FormularioUsuario
+        nuevoUsuario={nuevoUsuario}
+        setNuevoUsuario={setNuevoUsuario}
+        agregarUsuario={agregarUsuario}
+      />  
 
       <h2>Usuarios:</h2>
 
