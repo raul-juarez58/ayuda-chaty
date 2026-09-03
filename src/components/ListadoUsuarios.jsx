@@ -1,28 +1,18 @@
 import Usuario from "./Usuario";
+import { useContext } from "react";
+import UsuarioContext from "../context/UsuarioContext";
 
-  function ListadoUsuarios({
-  usuarios,
-  editandoId,
-  nombreEditado,
-  setNombreEditado,
-  setEditandoId,
-  guardarEdicion,
-  eliminarUsuario,
-  toggleCompletado
-}) {
+  function ListadoUsuarios(){
+ 
+
+  const {usuarios} = useContext(UsuarioContext);
+
   return (
     <ul>
       {usuarios.map((user) => (
         <Usuario
           key={user.id}
           user={user}
-          editandoId={editandoId}
-          nombreEditado={nombreEditado}
-          setNombreEditado={setNombreEditado}
-          setEditandoId={setEditandoId}
-          guardarEdicion={guardarEdicion}
-          eliminarUsuario={eliminarUsuario}
-          toggleCompletado={toggleCompletado}
           />
       ))}
     </ul>

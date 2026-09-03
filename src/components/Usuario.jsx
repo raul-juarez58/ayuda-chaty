@@ -1,27 +1,36 @@
-function Usuario({ 
-    user,
-    editandoId,
-    nombreEditado,
-    setNombreEditado,
-    setEditandoId,
-    guardarEdicion,
-    eliminarUsuario,
-    toggleCompletado
+import { useContext, useState } from "react";
+import UsuarioContext from "../context/UsuarioContext";
+
+    function Usuario({
+    user
 }) {
+    const [nombreEditado, setNombreEditado] = useState("");
+    const [editando, setEditando] = useState(false);
+
+    const { eliminarUsuario,
+        guardarEdicion,
+        toggleCompletado
+     } = useContext(UsuarioContext);
+
     return (
         <li>
-            {editandoId === user.id ? (
+            {editando ? (
                 <>
                 <input
-                  value={nombreEditado}
+                  value={nombreEditado || ""}
                   onChange={(e) => setNombreEditado(e.target.value)}
                  />
 
-                 <button onClick={() => guardarEdicion(user.id)}>
+                 <button onClick={() => {
+                    guardarEdicion(user.id, nombreEditado);
+                    setEditando(false);
+
+                 }}
+                    >
                     Guardar
                   </button> 
 
-                 <button onClick={() => setEditandoId(null)}>
+                 <button onClick={() => setEditando(false)}>
                     Cancelar
                  </button>     
                 </>
@@ -29,7 +38,7 @@ function Usuario({
                 <>
                    <input
                       type="checkbox"
-                      checked={user.completed}
+                      checked={!!user.completed}
                       onChange={() => toggleCompletado(user.id)}
                     />
                     <span className={user.completed ? "completed" : ""}>
@@ -38,7 +47,7 @@ function Usuario({
 
                     <button
                        onClick={() => {
-                        setEditandoId(user.id);
+                        setEditando(true);
                         setNombreEditado(user.name);
                        }} 
                        >

@@ -1,8 +1,14 @@
-function FormularioUsuario( {
+import UsuarioContext from "../context/UsuarioContext";
+import {useContext} from "react";
+
+    function FormularioUsuario() { 
+    const {    
     nuevoUsuario,
     setNuevoUsuario,
     agregarUsuario
-}) {
+    } = useContext(UsuarioContext);
+
+
    return (
     <>
         <input
